@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AzureSecLab — identity access evidence</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#090a0d;color:#f0f1f3;font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:8vh auto;padding:24px}header{border-bottom:2px solid #f04452;padding-bottom:24px}h1{font-size:40px;margin:0;color:#f04452}section{background:#111318;border:1px solid #2b3039;padding:24px;margin-top:24px;border-radius:12px}p{color:#9a9faa}table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:12px;border-bottom:1px solid #2b3039}.tag{font:13px monospace;color:#e9bd62}.result{color:#65d39b}a{color:#8abcf0}@media(max-width:600px){main{margin:20px auto}h1{font-size:30px}}
+</style><main><header><div class="tag">OBSIDIAN SIGNAL / CLOUD &amp; IDENTITY</div><h1>AzureSecLab</h1><p>Managed identity permissions: attack, observe, harden.</p></header>
+<section><h2>Vulnerable probe</h2><div class="tag">Evidence source: synthetic-fixture</div>
+<p>Synthetic example only — no Azure deployment or live detection is demonstrated.</p>
+<strong class="result">Expected access pattern: PASS</strong><table><thead><tr><th>Target secret</th><th>HTTP status</th></tr></thead><tbody><tr><td>lab-canary</td><td>200</td></tr><tr><td>lab-payroll</td><td>200</td></tr></tbody></table></section>
+<section><h2>Interpretation</h2><p>Hardened access should retain canary reads and deny unrelated payroll reads. A 403 may also reflect a network restriction or RBAC propagation; inspect Key Vault diagnostics before attributing it to remediation. A successful probe is not proof that a Sentinel analytic has fired.</p></section></main></html>

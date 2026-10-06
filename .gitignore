@@ -1,0 +1,16 @@
+.tools/
+.venv/
+__pycache__/
+.pytest_cache/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+*.auto.tfvars
+!*.tfvars.example
+.env
+*.pem
+*.key
+evidence/live/
+reports/

@@ -1,0 +1,6 @@
+subscription_id = "REPLACE-SUBSCRIPTION-UUID"
+prefix          = "REPLACE-UNIQUE-PREFIX"
+operator_ipv4   = "REPLACE-PUBLIC-IPV4"
+ssh_public_key  = "ssh-ed25519 REPLACE-PUBLIC-KEY"
+security_mode   = "hardened"
+enable_sentinel = false

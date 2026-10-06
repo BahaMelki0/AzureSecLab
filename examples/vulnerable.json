@@ -1,0 +1,8 @@
+{
+  "provenance": "synthetic-fixture",
+  "phase": "vulnerable",
+  "events": [
+    {"secret": "lab-canary", "status": 200},
+    {"secret": "lab-payroll", "status": 200}
+  ]
+}

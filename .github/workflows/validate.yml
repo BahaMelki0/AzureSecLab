@@ -1,0 +1,30 @@
+name: Validate lab
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12'
+      - name: Test evidence and probe contracts
+        run: python -m unittest discover -s tests -v
+      - name: Install checksum-verified Terraform
+        shell: bash
+        run: |
+          curl -fsSLO https://releases.hashicorp.com/terraform/1.16.5/terraform_1.16.5_linux_amd64.zip
+          curl -fsSLO https://releases.hashicorp.com/terraform/1.16.5/terraform_1.16.5_SHA256SUMS
+          grep ' terraform_1.16.5_linux_amd64.zip$' terraform_1.16.5_SHA256SUMS | sha256sum --check
+          unzip -q terraform_1.16.5_linux_amd64.zip -d "$RUNNER_TEMP/terraform"
+          echo "$RUNNER_TEMP/terraform" >> "$GITHUB_PATH"
+      - run: terraform -chdir=infra fmt -check -recursive
+      - run: terraform -chdir=infra init -backend=false -input=false -lockfile=readonly
+      - run: terraform -chdir=infra validate
+      - run: terraform -chdir=infra test
+      - name: Generate synthetic sample report
+        run: python -m scripts.report --input examples/hardened.json --output reports/hardened.html
